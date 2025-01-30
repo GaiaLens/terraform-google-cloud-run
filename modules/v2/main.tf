@@ -135,7 +135,7 @@ resource "google_cloud_run_v2_service" "main" {
         working_dir = containers.value.working_dir
         depends_on  = containers.value.depends_on_container
         dynamic "ports" {
-          for_each = lookup(containers.value, "ports", {}) != {} ? [containers.value.ports] : []
+          for_each = lookup(containers.value, "ports", {}) != {} && lookup(containers.value, "is_sidecar", false) == false ? [containers.value.ports] : []
           content {
             name           = ports.value["name"]
             container_port = ports.value["container_port"]

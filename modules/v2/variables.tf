@@ -58,6 +58,7 @@ variable "containers" {
       name           = optional(string, "http1")
       container_port = optional(number, 8080)
     }), {})
+    is_sidecar = optional(bool, false)
     resources = optional(object({
       limits = optional(object({
         cpu    = optional(string)
